@@ -1,0 +1,12 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: colors
+spec:
+  template:
+    metadata:
+      annotations:
+        serving.knative.dev/rolloutDuration: "30s"
+    spec:
+      containers:
+        - image: ko://github.com/n3wscott/k8s-meetup-atlanta/cmd/colors

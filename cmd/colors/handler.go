@@ -32,10 +32,10 @@ type Handler struct {
 }
 
 func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	color := map[string]string{
-		"red":   "0",
-		"green": "0",
-		"blue":  "255",
+	color := map[string]int{
+		"red":   0,
+		"green": 0,
+		"blue":  255,
 	}
 	_ = indexTemplate.Execute(w, color)
 

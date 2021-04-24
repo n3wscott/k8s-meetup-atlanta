@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hardway-colors
+  labels:
+    app: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hardway-colors
+  template:
+    metadata:
+      labels:
+        app: hardway-colors
+    spec:
+      containers:
+        - name: colors
+          image: ko://github.com/n3wscott/k8s-meetup-atlanta/cmd/colors
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hardway-colors
+spec:
+  selector:
+    app: hardway-colors
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+#
+# Etc. What is not here: scaling up based on requests, readiness probes, graceful shutdowns, domain mappings, ingress control...
+#

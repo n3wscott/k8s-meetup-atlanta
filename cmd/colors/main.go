@@ -34,3 +34,9 @@ func main() {
 		log.Fatalf("failed to start server, %s", err.Error())
 	}
 }
+
+/*
+
+http://colorgrid.default.d2k.n3wscott.com/?url=http://colors.default.d2k.n3wscott.com&count=25
+
+*/

@@ -1,0 +1,25 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: mixer
+spec:
+  template:
+    spec:
+      containers:
+        - image: ko://github.com/n3wscott/k8s-meetup-atlanta/cmd/mixer
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: mixer
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: com.n3wscott.atlanta.colors
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: mixer
+      namespace: default

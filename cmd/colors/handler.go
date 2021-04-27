@@ -32,10 +32,14 @@ type Handler struct {
 }
 
 func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet || r.URL.Path != "/" {
+		return
+	}
+
 	color := map[string]int{
-		"red":   0,
+		"red":   255,
 		"green": 0,
-		"blue":  255,
+		"blue":  0,
 	}
 	_ = indexTemplate.Execute(w, color)
 

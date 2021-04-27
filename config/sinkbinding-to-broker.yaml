@@ -10,5 +10,18 @@ spec:
   sink:
     ref:
       apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: sockeye
+spec:
+  broker: default
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: sockeye
+      namespace: default

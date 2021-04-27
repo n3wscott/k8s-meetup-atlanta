@@ -10,8 +10,7 @@ import (
 )
 
 type envConfig struct {
-	Port int    `envconfig:"PORT" default:"8080" required:"true"`
-	Sink string `envconfig:"K_SINK" required:"true"`
+	Port int `envconfig:"PORT" default:"8080" required:"true"`
 }
 
 func main() {
@@ -20,7 +19,7 @@ func main() {
 		log.Fatalf("failed to process env var: %s", err)
 	}
 
-	client, err := cloudevents.NewClientHTTP(cloudevents.WithPort(env.Port), cloudevents.WithTarget(env.Sink))
+	client, err := cloudevents.NewClientHTTP(cloudevents.WithPort(env.Port))
 	if err != nil {
 		log.Printf("failed to make cloudevents client: %v\n", err)
 	}
@@ -48,17 +47,17 @@ func mix(event cloudevents.Event) *cloudevents.Event {
 		return nil
 	}
 
-	c.Red = rand.Intn(c.Red) + rand.Intn(64)
+	c.Red = rand.Intn(c.Red+1) + rand.Intn(64)
 	if c.Red > 255 {
 		c.Red = 255
 	}
 
-	c.Green = rand.Intn(c.Green) + rand.Intn(64)
+	c.Green = rand.Intn(c.Green+1) + rand.Intn(64)
 	if c.Green > 255 {
 		c.Green = 255
 	}
 
-	c.Blue = rand.Intn(c.Blue) + rand.Intn(64)
+	c.Blue = rand.Intn(c.Blue+1) + rand.Intn(64)
 	if c.Blue > 255 {
 		c.Blue = 255
 	}

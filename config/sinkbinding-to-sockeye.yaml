@@ -9,6 +9,6 @@ spec:
     name: colors
   sink:
     ref:
-      apiVersion: eventing.knative.dev/v1
+      apiVersion: serving.knative.dev/v1
       kind: Service
       name: sockeye
